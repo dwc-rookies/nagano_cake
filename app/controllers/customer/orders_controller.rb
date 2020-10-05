@@ -7,6 +7,8 @@ class Customer::OrdersController < ApplicationController
   end
 
   def new
+    @order = Order.new
+    @order_customer = Customer.find(current_user.id)
   end
 
   def create

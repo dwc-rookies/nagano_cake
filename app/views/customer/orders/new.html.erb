@@ -1,1 +1,8 @@
-orders#new
+<h2>注文情報入力</h2>
+<%= form_for(@order) do |f| %>
+  <h4>支払方法</h4>
+  <%= f.radio_button :pay, :credit_card　%>
+  <%= f.label :クレジットカード　%>
+  <%= f.radio_button :pay, :bank_transfer　%>
+  <%= f.label :銀行振込　%>
+<% end %>

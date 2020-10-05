@@ -8,6 +8,8 @@ class Order < ApplicationRecord
   validates :postcode, presence: true
   validates :address, presence: true
   validates :name, presence: true
+　
+  enum pay: {credit_card:1, bank_transfer:2}
 
   belongs_to :customer
   has_many :orderd_products, dependent: :destroy
