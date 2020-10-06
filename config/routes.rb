@@ -5,7 +5,10 @@ Rails.application.routes.draw do
     devise_for :admins, controllers: {
     sessions: 'admin/admins/sessions',
     registrations: 'admin/admins/registrations',
+
+
     passwords: 'admin/admins/passwords'
+
   }
 end
 
@@ -14,7 +17,11 @@ end
   devise_for :customers, controllers: {
     sessions: 'customer/customers/sessions',
     registrations: 'customer/customers/registrations',
+
+    
+
     passwords: 'customer/cuscustomers/passwords'
+
   }
 end
 

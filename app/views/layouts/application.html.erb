@@ -1,15 +1,65 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>NaganoCake</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
+  <title>NaganoCake</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-  <body>
-    <%= yield %>
-  </body>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">ここにロゴを入れる</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarEexample">
+          <ul class="nav navbar-nav navbar-right">
+            <% if customer_signed_in? %>
+            <li>ユーザー</li>
+            <li><%= link_to "マイページ", customer_path %></li>
+            <li><%= link_to "商品一覧", products_path %></li>
+            <li><%= link_to "カート", cart_items_path %></li>
+            <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
+            <% elsif admin_admin_signed_in? %>
+            <li>管理者</li>
+            <li><%= link_to "商品一覧", admin_products_path %></li>
+            <li><%= link_to "会員一覧", admin_customers_path %></li>
+            <li><%= link_to "注文履歴一覧", admin_orders_path %></li>
+            <li><%= link_to "ジャンル一覧", admin_genres_path %></li>
+            <li><%= link_to "ログアウト", destroy_admin_admin_session_path, method: :delete %></li>
+            <% else %>
+            <li>ゲストユーザー</li>
+            <li><%= link_to "About", about_path %></li>
+            <li><%= link_to "商品一覧", products_path %></li>
+            <li><%= link_to "新規登録", new_customer_registration_path %></li>
+            <li><%= link_to "ログイン", new_customer_session_path %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  </header>
+
+  <%= yield %>
+
+  <footer>
+    <nav class="navbar navbar-default">
+        <p>フッター</p>
+    </nav>
+  </footer>
+
+</body>
+
 </html>
