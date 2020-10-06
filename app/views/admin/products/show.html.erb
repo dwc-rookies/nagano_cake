@@ -1,1 +1,44 @@
-admin/products#show
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 mt-1">
+            <h1>商品詳細</h1>
+            <%= attachment_image_tag @product, :product_image, :fill, 300,300, format: "jpeg", class: "pull-left profile-img", fallback: "no_image.jpg", :width => "300", :height => "300" %>
+        </div>
+        <div class="col-lg-8 mt-5">
+            <table>
+                <tr>
+                    <td><label>商品名</label></td>
+                    <td>
+                        <%= @product.product_name %>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>商品説明</label></td>
+                    <td>
+                        <%= @product.caption %>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>ジャンル</label></td>
+                    <td>
+                        <%= @product.category.name %>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>税込価格(税抜価格)</label></td>
+                    <td>
+                        <%= (@product.tax_excluded*1.1).floor %>
+                        (<%= @product.tax_excluded %>)　円
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>販売ステータス</label></td>
+                    <td>
+                        <%=@product.sale_status%>
+                    </td>
+                </tr>
+            </table>
+                <%= link_to '編集する', edit_admin_product_path(@product.id), class: "btn btn-sm btn-primary mt-2" %>
+        </div>
+    </div>
+</div>

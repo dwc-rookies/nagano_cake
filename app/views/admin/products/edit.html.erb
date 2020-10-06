@@ -1,1 +1,42 @@
-admin/products#edit
+<div class="container">
+    <div class="row">
+        <div class="col-xs-4 mt-1">
+            <h1>商品編集画面</h1>
+            <%= attachment_image_tag @product, :product_image, :fill, 300,300, format: "jpeg", class: "pull-left profile-img", fallback: "no_image.jpg", :width => "300", :height => "300" %>
+            <%= form_for(@product) do |f| %>
+            <%= f.attachment_field :product_image, class: "btn btn-sm btn-block btn-primary mb-1" %>
+        </div>
+        <div class="col-xs-8 mt-5">
+            <table>
+                <tr>
+                    <td><label>商品名</label></td>
+                    <td>
+                        <%= f.text_field :product_name %>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>商品説明</label></td>
+                    <td>
+                        <%= f.text_field :caption %>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>ジャンル</label></td>
+                    <td><%= f.collection_select :category_id, Category.all, :id, :name, :prompt => "選択してください" %>
+                    </td>
+                <tr>
+                    <td><label>税抜価格</label></td>
+                    <td>
+                        <%= f.text_field :tax_excluded %>円</td>
+                </tr>
+                <tr>
+                    <td><label>販売ステータス</label></td>
+                    <td>
+                        <%= f.select :sale_status, Product.sale_statuses.keys, :selected=>Product.sale_statuses[@product.sale_status] %>
+                    </td>
+            </table>
+            <%= f.submit "変更を保存", class: "btn btn-sm btn-primary mt-2" %>
+            <% end %>
+        </div>
+    </div>
+</div>
