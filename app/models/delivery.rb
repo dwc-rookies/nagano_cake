@@ -5,6 +5,6 @@ class Delivery < ApplicationRecord
   validates :postcode, presence: true
   validates :address, presence: true
 
-  belongs_to :customer, optional: true
+  belongs_to :customer
 
 end

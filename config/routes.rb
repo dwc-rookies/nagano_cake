@@ -3,18 +3,18 @@ Rails.application.routes.draw do
 # admin側のdevise
   namespace :admin do
     devise_for :admins, controllers: {
-    sessions: 'admin/admins/sessions',
-    registrations: 'admin/admins/registrations',
-    passwords: 'admin/admins/passwords'
+    sessions: 'admins/sessions',
+    registrations: 'admins/registrations',
+    passwords: 'admins/passwords'
   }
 end
 
 # customer側のdevise
   scope module: 'customer' do
   devise_for :customers, controllers: {
-    sessions: 'customer/customers/sessions',
-    registrations: 'customer/customers/registrations',
-    passwords: 'customer/cuscustomers/passwords'
+    sessions: 'customers/sessions',
+    registrations: 'customers/registrations',
+    passwords: 'customers/passwords'
   }
 end
 
