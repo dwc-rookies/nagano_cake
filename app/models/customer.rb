@@ -10,7 +10,7 @@ class Customer < ApplicationRecord
   validates :postcode, presence: true
   validates :address, presence: true
   validates :phone_number, presence: true
-  validates :is_deleated, presence: true
+  validates :is_deleated, inclusion: {in: [true, false]}
 
   has_many :deliveries, dependent: :destroy
   has_many :orders, dependent: :destroy
