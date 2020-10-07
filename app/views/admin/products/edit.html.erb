@@ -1,1 +1,48 @@
-admin/products#edit
+<div class="container">
+  <div class="row">
+    <h1>商品編集画面</h1>
+    <%= form_for([:admin, @product]) do |f| %> #namespaceがあるため、[:admin, @product]と記述する。
+    <% if @product.errors.any? %>
+    <div class="text-danger">
+      <h3><%= @product.errors.count %> errors prohibited this obj from being saved:</h3>
+      <ul>
+        <% @product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <%= attachment_image_tag @product, :image, :fill, 300,300, format: "jpeg", class: "pull-left profile-img", fallback: "no_image.jpg", :width => "300", :height => "300" %>
+    <%= f.attachment_field :image %>
+    <table>
+      <tr>
+        <td><label>商品名</label></td>
+        <td>
+          <%= f.text_field :name %>
+        </td>
+      </tr>
+      <tr>
+        <td><label>商品説明</label></td>
+        <td>
+          <%= f.text_field :description %>
+        </td>
+      </tr>
+      <tr>
+        <td><label>ジャンル</label></td>
+        <td><%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => "--選択してください--" %>
+        </td>
+      <tr>
+        <td><label>税抜価格</label></td>
+        <td>
+          <%= f.text_field :tax_excluded_price %>円</td>
+      </tr>
+      <tr>
+        <td><label>販売ステータス</label></td>
+        <td>
+          <%= f.select :is_active, [["販売中", true], ["販売停止中", false]] %><br>
+        </td>
+    </table>
+    <%= f.submit "変更を保存", class: "btn btn-sm btn-primary mt-2" %>
+    <% end %>
+  </div>
+</div>
