@@ -14,7 +14,7 @@ end
   devise_for :customers, controllers: {
     sessions: 'customer/customers/sessions',
     registrations: 'customer/customers/registrations',
-    passwords: 'customer/customers/passwords'
+    passwords: 'customer/cuscustomers/passwords'
   }
 end
 
