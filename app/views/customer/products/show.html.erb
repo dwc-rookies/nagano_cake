@@ -1,1 +1,18 @@
-products#show
+<div class="container">
+  <div class="row">
+    <%= attachment_image_tag @product, :image, :fill, 300,300, format: "jpeg", class: "pull-left profile-img", fallback: "no_image.jpg", :width => "300", :height => "300" %>
+  </div>
+    <h2><%= @product.name %></h2>
+    <h4>商品説明</h4>
+    <%= @product.description %>
+    <h2>¥<%= (@product.tax_excluded_price*1.1).floor %>(税込)</h2>
+    <% if customer_signed_in? %>
+    <%= form_for(@cart_item) do |f| %>
+    <%= f.hidden_field :customer_id, :value => current_customer.id %>
+    <%= f.hidden_field :product_id, :value => @product.id %>
+    <%= f.select :quantity, [1,2,3,4,5] %>
+    <%= f.submit "カートに入れる" %>
+    <% end %>
+    <% end %>
+  </div>
+</div>
