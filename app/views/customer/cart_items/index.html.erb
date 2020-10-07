@@ -18,11 +18,12 @@
 
       <tr>
         <td>
-          <%= attachment_image_tag cart_item.product,:image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", :width => "60", :height => "60" %><%= cart.product.product_name %>
+          <%= attachment_image_tag cart_item.product,:image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", :width => "60", :height => "60" %><%= cart_item.product.name %>
         </td>
         <td><%= price = (cart_item.product.tax_excluded_price * 1.1).floor %></td>
-        <td><%= form_for(cart_item,url:cart_item_path(cart_item), html: {method: "patch"}) do |f| %>
-          <%= f.text_field :quantity %><%= f.submit "数量を変える" %>
+        <td><%= form_for(cart_item, url:cart_item_path(cart_item), html: {method: "patch"}) do |f| %>
+          <%= f.text_field :quantity %>
+          <%= f.submit "数量を変える" %>
           <% end %>
         </td>
         <td><%= price * cart_item.quantity %></td>
