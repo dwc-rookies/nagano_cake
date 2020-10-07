@@ -17,7 +17,7 @@ class Admin::ProductsController < ApplicationController
     @product = Product.new(product_params)
     if @product.save
       flash[:notice] = "You have creatad product successfully."
-      redirect_to product_path(@product.id)
+      redirect_to admin_product_path(@product.id)
     else
       render 'new'
     end
@@ -40,7 +40,7 @@ class Admin::ProductsController < ApplicationController
 private
 
 def product_params
-  params.require(:product).permit(:name, :tax_excluded_price, :description, :image, :is_active)
+  params.require(:product).permit(:name, :tax_excluded_price, :description, :image, :is_active, :genre_id)
 end
 
 end

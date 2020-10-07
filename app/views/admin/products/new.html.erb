@@ -1,8 +1,8 @@
 <div class="container">
-<h2>商品新規登録</h2>
-<div class="row">
-<div class="col-xs-12">
-<%= form_for(@product,url:admin_products_path) do |f| %>
+  <h2>商品新規登録</h2>
+  <div class="row">
+    <div class="col-xs-12">
+      <%= form_for(@product,url:admin_products_path) do |f| %>
       <% if @product.errors.any? %>
       <div class="text-danger">
         <h3><%= @product.errors.count %> errors prohibited this obj from being saved:</h3>
@@ -13,14 +13,15 @@
         </ul>
       </div>
       <% end %>
-  <%= f.attachment_field :image %>
-  <h4>商品名</h4><%= f.text_field :name %>
-  <h4>商品説明</h4><%= f.text_area :description %>
-  <h4>ジャンル</h4><%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => "--選択してください--" %>
-  <h4>税抜価格</h4><p><%= f.text_field :tax_excluded_price %>円</p>
-  <h4>販売ステータス</h4><%= f.select :is_active, [["販売中", true], ["販売停止中", false]], :prompt => "--選択してください--" %><br>
-  <%= f.submit "新規登録", class:'mt-2'%>
-<% end %>
-</div>
-</div>
+      <%= f.attachment_field :image %>
+      <h4>商品名</h4><%= f.text_field :name %>
+      <h4>商品説明</h4><%= f.text_area :description %>
+      <h4>ジャンル</h4><%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => "--選択してください--" %>
+      <h4>税抜価格</h4>
+      <p><%= f.text_field :tax_excluded_price %>円</p>
+      <h4>販売ステータス</h4><%= f.select :is_active, [["販売中", true], ["販売停止中", false]] %><br>
+      <%= f.submit "新規登録" %>
+      <% end %>
+    </div>
+  </div>
 </div>
