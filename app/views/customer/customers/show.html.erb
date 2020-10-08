@@ -1,1 +1,55 @@
-customers#show
+<h3>マイページ</h3><br>
+<strong>登録情報</strong>
+  <%= link_to "編集する", edit_customer_path(@customer), class: "btn btn-primary" %>
+  <%= link_to "パスワードを変更する", edit_customer_registration_path(@customer), class: "btn btn-primary" %> <br><br>
+
+<table class="table tabele-bordered">
+  <tr>
+    <th>氏名</th>
+    <td>
+    <%= @customer.first_name %>
+    <%= @customer.last_name %>
+    </td>
+  </tr>
+
+  <tr>
+    <th>カナ</th>
+    <td>
+    <%= @customer.first_name_kana %>
+    <%= @customer.last_name_kana%>
+    </td>
+  </tr>
+
+  <tr>
+    <th>郵便番号</th>
+    <td>
+    <%= @customer.postcode %>
+    </td>
+  </tr>
+
+  <tr>
+    <th>住所</th>
+    <td>
+    <%= @customer.address %>
+    </td>
+  </tr>
+
+  <tr>
+    <th>電話番号</th>
+      <td>
+      <%= @customer.phone_number %>
+      </td>
+  </tr>
+
+  <tr>
+    <th>メールアドレス</th>
+    <td>
+    <%= @customer.email %>
+    </td>
+  </tr>
+</table>
+
+<strong>配送先</strong>
+  <%= link_to "一覧を見る", deliveries_path, class: "btn btn-primary" %> <br><br>
+
+<strong>注文履歴</strong>
