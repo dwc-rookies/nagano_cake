@@ -26,11 +26,10 @@
       <tr>
         <td>注文ステータス</td>
         <td>
-
       <%= form_for(@order) do |f| %>
+          <%= f.select :status, [["入金待ち", 0], ["入金確認", 1], ["制作中", 2], ["発送準備中", 3], ["発送済み", 4]], selected: @order.status %>
+      <%= f.submit "更新" %>
       <% end %>
-
-
         </td>
       </tr>
     </table>
@@ -46,16 +45,18 @@
           <th>小計</th>
           <th>制作ステータス</th>
         </tr>
-        <% @ordered_products.each do |ordered_product| %>
+        <% @order.ordered_products.each do |ordered_product| %>
         <tr>
           <td><%= ordered_product.product.name %></td>
           <td><%= ordered_product.product.tax_excluded_price * 1.1).floor %></td>
           <td><%= ordered_product.quantity %></td>
           <td><%= ordered_product.product.tax_excluded_price * 1.1 * quantity %></td>
           <td>
-          <%= form_for(@order) do |f| %>
+          <%= form_for(ordered_product, url: {controller: admin/ordered_products, action:update}) do |f| %>
+          <%= f.select :product_status, [["着手不可", 0], ["制作待ち", 1], ["制作中", 2], ["制作完了", 3]], selected: orderd_product.product_status %>
+          <%= f.submit "更新" %>
+
           <% end %>
-          
           </td>
         </tr>
         <% end %>

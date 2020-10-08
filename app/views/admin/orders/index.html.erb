@@ -16,15 +16,15 @@
       </td>
       <td><% order.customer.first_name+order.customer.last_name %></td>
       <td>
-      <% order.ordered_products.sum(:quantity) %>
+        <% order.ordered_products.sum(:quantity) %>
       </td>
       <td>
-        <% case order.status %>
-        <% when 0 %>入金待ち
-        <% when 1 %>入金確認
-        <% when 2 %>制作中
-        <% when 3 %>発送準備中
-        <% when 4 %>発送済み
+        <% if order.status == 0 %>入金待ち
+        <% elsif  order.status == 1 %>入金確認
+        <% elsif  order.status == 2 %>制作中
+        <% elsif  order.status == 3 %>発送準備中
+        <% elsif  order.status == 4 %>発送済み
+        <% end %>
       </td>
     </tr>
     <% end %>
