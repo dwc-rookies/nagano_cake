@@ -7,45 +7,76 @@
     <table>
       <tr>
         <td>購入者</td>
-        <td></td>
+        <td><%= order.customer.name %></td>
       </tr>
       <tr>
         <td>配送先</td>
-        <td></td>
+        <td><%= order.postcode+order.address+order.name %></td>
       </tr>
       <tr>
         <td>支払方法</td>
-        <td></td>
+        <td>
+        <% if order.pay == 0 %>
+        クレジットカード
+        <% else %>
+        銀行振込
+        <% end %>
+        </td>
       </tr>
       <tr>
         <td>注文ステータス</td>
-        <td></td>
+        <td>
+
+      <%= form_for(@order) do |f| %>
+      <% end %>
+
+
+        </td>
       </tr>
     </table>
   </div>
 
   <div class="row">
     <div class="col-xs-8">
-    <table>
-    <tr>
-    <th>商品名</th>
-    <th>単価（税込）</th>
-    <th>数量</th>
-    <th>小計</th>
-    <th>制作ステータス</th>
-    </tr>
-    <% @ordered_products.each do |ordered_product| %>
-    <tr>
-    <td><% ordered_product.name %></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    </tr>
-    </table>
+      <table>
+        <tr>
+          <th>商品名</th>
+          <th>単価（税込）</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th>制作ステータス</th>
+        </tr>
+        <% @ordered_products.each do |ordered_product| %>
+        <tr>
+          <td><%= ordered_product.product.name %></td>
+          <td><%= ordered_product.product.tax_excluded_price * 1.1).floor %></td>
+          <td><%= ordered_product.quantity %></td>
+          <td><%= ordered_product.product.tax_excluded_price * 1.1 * quantity %></td>
+          <td>
+          <%= form_for(@order) do |f| %>
+          <% end %>
+          
+          </td>
+        </tr>
+        <% end %>
+      </table>
     </div>
 
     <div class="col-xs-4">
+      <table>
+        <tr>
+          <td>商品合計</td>
+          <td><%= order.charge - order.postage %></td>
+        </tr>
+        <tr>
+          <td>送料</td>
+          <td><%= order.postage %></td>
+        </tr>
+        <tr>
+          <td>請求金額合計</td>
+          <td><%= order.charge %></td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
