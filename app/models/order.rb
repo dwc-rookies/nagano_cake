@@ -9,8 +9,11 @@ class Order < ApplicationRecord
   validates :address, presence: true
   validates :name, presence: true
 
+  enum pay: {credit_card:0, bank_transfer:1}
+
+
   belongs_to :customer
   has_many :orderd_products, dependent: :destroy
-  
+
 
 end
