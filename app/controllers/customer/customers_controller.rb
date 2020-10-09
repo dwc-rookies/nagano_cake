@@ -1,5 +1,5 @@
 class Customer::CustomersController < ApplicationController
-
+  before_action :authenticate_customer!
   def show
     @customer = current_customer
   end
@@ -19,6 +19,7 @@ class Customer::CustomersController < ApplicationController
 
   def withdraw
   end
+
 
   def destroy
   end
