@@ -1,1 +1,82 @@
-admin/orders#show
+<div class="container">
+  <div class="row">
+    <h2>注文履歴詳細</h2>
+  </div>
+
+  <div class="row">
+    <table>
+      <tr>
+        <td>購入者</td>
+        <td><%= @order.customer.first_name+@order.customer.last_name %></td>
+      </tr>
+      <tr>
+        <td>配送先</td>
+        <td><%= @order.postcode+@order.address+@order.name %></td>
+      </tr>
+      <tr>
+        <td>支払方法</td>
+        <td>
+        <% if @order.pay == 0 %>
+        クレジットカード
+        <% else %>
+        銀行振込
+        <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td>注文ステータス</td>
+        <td>
+      <%= form_for(@order, url: admin_order_path(@order)) do |f| %>
+          <%= f.select :status, [["入金待ち", 0], ["入金確認", 1], ["制作中", 2], ["発送準備中", 3], ["発送済み", 4]], selected: @order.status %>
+      <%= f.submit "更新" %>
+      <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-8">
+      <table>
+        <tr>
+          <th>商品名</th>
+          <th>単価（税込）</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th>制作ステータス</th>
+        </tr>
+        <% @ordered_products.each do |ordered_product| %>
+        <tr>
+          <td><%= ordered_product.product.name %></td>
+          <td><%= (ordered_product.product.tax_excluded_price * 1.1).floor %></td>
+          <td><%= ordered_product.quantity %></td>
+          <td><%= (ordered_product.product.tax_excluded_price * 1.1 * ordered_product.quantity).floor %></td>
+          <td>
+          <%= form_for(ordered_product, url: admin_ordered_product_path(ordered_product)) do |f| %>
+          <%= f.select :production_status, [["着手不可", 0], ["制作待ち", 1], ["制作中", 2], ["制作完了", 3]], selected: ordered_product.production_status %>
+          <%= f.submit "更新" %>
+          <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+
+    <div class="col-xs-4">
+      <table>
+        <tr>
+          <td>商品合計</td>
+          <td><%= @order.charge - @order.postage %></td>
+        </tr>
+        <tr>
+          <td>送料</td>
+          <td><%= @order.postage %></td>
+        </tr>
+        <tr>
+          <td>請求金額合計</td>
+          <td><%= @order.charge %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
