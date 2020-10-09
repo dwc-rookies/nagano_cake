@@ -7,16 +7,16 @@
     <table>
       <tr>
         <td>購入者</td>
-        <td><%= order.customer.name %></td>
+        <td><%= @order.customer.first_name+@order.customer.last_name %></td>
       </tr>
       <tr>
         <td>配送先</td>
-        <td><%= order.postcode+order.address+order.name %></td>
+        <td><%= @order.postcode+@order.address+@order.name %></td>
       </tr>
       <tr>
         <td>支払方法</td>
         <td>
-        <% if order.pay == 0 %>
+        <% if @order.pay == 0 %>
         クレジットカード
         <% else %>
         銀行振込
@@ -26,7 +26,7 @@
       <tr>
         <td>注文ステータス</td>
         <td>
-      <%= form_for(@order) do |f| %>
+      <%= form_for(@order, url: admin_order_path(@order)) do |f| %>
           <%= f.select :status, [["入金待ち", 0], ["入金確認", 1], ["制作中", 2], ["発送準備中", 3], ["発送済み", 4]], selected: @order.status %>
       <%= f.submit "更新" %>
       <% end %>
@@ -45,17 +45,16 @@
           <th>小計</th>
           <th>制作ステータス</th>
         </tr>
-        <% @order.ordered_products.each do |ordered_product| %>
+        <% @ordered_products.each do |ordered_product| %>
         <tr>
           <td><%= ordered_product.product.name %></td>
-          <td><%= ordered_product.product.tax_excluded_price * 1.1).floor %></td>
+          <td><%= (ordered_product.product.tax_excluded_price * 1.1).floor %></td>
           <td><%= ordered_product.quantity %></td>
-          <td><%= ordered_product.product.tax_excluded_price * 1.1 * quantity %></td>
+          <td><%= (ordered_product.product.tax_excluded_price * 1.1 * ordered_product.quantity).floor %></td>
           <td>
-          <%= form_for(ordered_product, url: {controller: admin/ordered_products, action:update}) do |f| %>
-          <%= f.select :product_status, [["着手不可", 0], ["制作待ち", 1], ["制作中", 2], ["制作完了", 3]], selected: orderd_product.product_status %>
+          <%= form_for(ordered_product, url: admin_ordered_product_path(ordered_product)) do |f| %>
+          <%= f.select :production_status, [["着手不可", 0], ["制作待ち", 1], ["制作中", 2], ["制作完了", 3]], selected: ordered_product.production_status %>
           <%= f.submit "更新" %>
-
           <% end %>
           </td>
         </tr>
@@ -67,15 +66,15 @@
       <table>
         <tr>
           <td>商品合計</td>
-          <td><%= order.charge - order.postage %></td>
+          <td><%= @order.charge - @order.postage %></td>
         </tr>
         <tr>
           <td>送料</td>
-          <td><%= order.postage %></td>
+          <td><%= @order.postage %></td>
         </tr>
         <tr>
           <td>請求金額合計</td>
-          <td><%= order.charge %></td>
+          <td><%= @order.charge %></td>
         </tr>
       </table>
     </div>

@@ -7,7 +7,7 @@ class Admin::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @ordered_product = OrderedProduct.all.includes(:rooms)
+    @ordered_products = OrderedProduct.where(order_id: @order.id)
   end
 
   def update

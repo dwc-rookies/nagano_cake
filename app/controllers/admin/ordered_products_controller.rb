@@ -11,7 +11,7 @@ class Admin::OrderedProductsController < ApplicationController
   private
 
   def ordered_product_params
-    params.require(:ordered_product).permit(:product_status)
+    params.require(:ordered_product).permit(:production_status)
   end
 
 end
