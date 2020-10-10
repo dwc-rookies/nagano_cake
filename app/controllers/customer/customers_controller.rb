@@ -20,6 +20,14 @@ class Customer::CustomersController < ApplicationController
   def withdraw
   end
 
+  def change
+    @customer = current_customer
+    if @customer.update(is_deleated: true)
+        sign_out current_customer
+    end
+    redirect_to root_path
+  end
+
 
   def destroy
   end
@@ -27,7 +35,7 @@ class Customer::CustomersController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:last_name,:first_name, :last_name_kana,:first_name_kana,:postcode,:address,:phone_number,:email)
+    params.require(:customer).permit(:last_name,:first_name, :last_name_kana,:first_name_kana,:postcode,:address,:phone_number,:email,:is_deleated)
   end
 
 end
