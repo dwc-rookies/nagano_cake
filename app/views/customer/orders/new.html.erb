@@ -2,9 +2,9 @@
 <%= form_for(@order, url: confirm_order_path) do |f| %>
 
   <h4>支払方法</h4>
-  <%= f.radio_button :pay, :0　%>
+  <%= f.radio_button :pay, :credit_card %>
   <%= f.label :クレジットカード　%>
-  <%= f.radio_button :pay, :1　%>
+  <%= f.radio_button :pay, :bank_transfer %>
   <%= f.label :銀行振込　%>
 
   <h4>お届け先</h4>
