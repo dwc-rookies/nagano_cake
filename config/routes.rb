@@ -44,6 +44,8 @@ scope module: 'customer' do
   delete 'cart_items' => 'cart_items#delete_all', as: 'delete_all_cart_items'
   resource :customer, only: [:show, :edit, :update]
   get 'customer/withdraw' => 'customers#withdraw', as: 'withdraw_customer'
+  patch 'customer/change' => 'customers#change',
+  as: 'change_customer'
   resources :deliveries, only: [:index, :create, :edit, :update, :destroy]
   resources :orders, only: [:index, :show, :new, :create]
   post 'orders/confirm' => 'orders#confirm', as: 'confirm_order'
