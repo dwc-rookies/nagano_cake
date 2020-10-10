@@ -1,0 +1,86 @@
+<<<<<<< HEAD
+=======
+<div class="container">
+  <div class="row">
+    <h3>注文履歴詳細</h3>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>注文情報</h4>
+      <table class="table table-striped table-hover">
+        <tr>
+          <td>注文日</td>
+          <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+        </tr>
+        <tr>
+          <td>配送先</td>
+          <td>
+            <%= @order.postcode %><br>
+            <%= @order.address %><br>
+            <%= @order.name %>
+          </td>
+        </tr>
+        <tr>
+          <td>支払方法</td>
+          <td>
+            <% if @order.pay == 0 %>
+            クレジットカード
+            <% else %>
+            銀行振込
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>注文ステータス</td>
+          <td>
+            <%= form_for(@order, url: admin_order_path(@order)) do |f| %>
+            <%= f.select :status, [["入金待ち", 0], ["入金確認", 1], ["制作中", 2], ["発送準備中", 3], ["発送済み", 4]], selected: @order.status %>
+            <%= f.submit "更新" %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-xs-4">
+      <h4>請求情報</h4>
+      <table class="table table-striped table-hover">
+        <tr>
+          <td>商品合計</td>
+          <td><%= @order.charge - @order.postage %></td>
+        </tr>
+        <tr>
+          <td>配送料</td>
+          <td><%= @order.postage %></td>
+        </tr>
+        <tr>
+          <td>ご請求額</td>
+          <td><%= @order.charge %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-10">
+    <h4>注文内容</h4>
+      <table class="table table-striped table-hover">
+        <tr>
+          <th>商品</th>
+          <th>単価（税込）</th>
+          <th>個数</th>
+          <th>小計</th>
+        </tr>
+        <% @ordered_products.each do |ordered_product| %>
+        <tr>
+          <td><%= ordered_product.product.name %></td>
+          <td><%= (ordered_product.product.tax_excluded_price * 1.1).floor %></td>
+          <td><%= ordered_product.quantity %></td>
+          <td><%= (ordered_product.product.tax_excluded_price * 1.1 * ordered_product.quantity).floor %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+>>>>>>> f9de3df05962a4f7e9ce7db657b108e42d2763af
