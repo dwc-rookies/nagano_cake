@@ -13,6 +13,13 @@ class Admin::OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     @order.update(order_params)
+    # 注文ステータスを入金確認にしたら、制作ステータスを制作待ちにする。
+    @ordered_products = OrderedProduct.where(order_id: @order.id)
+    if @order.status == 1
+      @ordered_products.each do |ordered_product|
+        ordered_product.update(production_status: 1)
+      end
+    end
     flash[:notice] = "You have updated order successfully."
     redirect_back(fallback_location: admin_orders_path)
   end
