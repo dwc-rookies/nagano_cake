@@ -15,3 +15,18 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+@font-face {
+  font-family: 'Lobster';
+  src: font-url('/assets/Lobster-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.head1 h1 {
+  font-family: 'Lobster';
+}
+
+.recommend h3 {
+  font-family: 'Lobster';
+}
