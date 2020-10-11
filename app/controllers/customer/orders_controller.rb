@@ -1,13 +1,12 @@
 class Customer::OrdersController < ApplicationController
-
+  before_action :authenticate_customer!
   def index
     @orders = current_customer.orders
-
   end
 
   def show
     @order = Order.find(params[:id])
-    @ordered_products = @order.ordered_products
+    @ordered_products = OrderedProduct.where(order_id: @order.id)
   end
 
   def new
