@@ -32,10 +32,12 @@
         <tr>
           <td>注文ステータス</td>
           <td>
-            <%= form_for(@order, url: admin_order_path(@order)) do |f| %>
-            <%= f.select :status, [["入金待ち", 0], ["入金確認", 1], ["制作中", 2], ["発送準備中", 3], ["発送済み", 4]], selected: @order.status %>
-            <%= f.submit "更新" %>
-            <% end %>
+          <% if @order.status == 0 %>入金待ち
+          <% elsif @order.status == 1 %>入金確認
+          <% elsif @order.status == 2 %>制作中
+          <% elsif @order.status == 3 %>発送準備中
+          <% elsif @order.status == 4 %>発送済み
+          <% end %>
           </td>
         </tr>
       </table>
