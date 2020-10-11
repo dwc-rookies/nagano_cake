@@ -1,33 +1,49 @@
-<h4>注文情報確認</h4>
-<table>
-	<thead>
-		<tr>
-			<th>商品名</th>
-			<th>単価(税込)</th>
-			<th>数量</th>
-			<th>小計</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @cart_items.each do |cart_item| %>
-		<tr>
-			<td><%= attachment_image_tag cart_item.product,:image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", :width => "60", :height => "60" %><%= cart_item.product.name %></td>
-			<td><%= price = (cart_item.product.tax_excluded_price * 1.1).floor %></td>
-			<td><%= cart.item.quantity %></td>
-			<td><%= price * cart_item.quantity %></td>
-		</tr>
-		<% end %>
-	</tbody>
-</table>
+<h1>注文情報確認</h1>
+<%= form_for (@order) do |f| %>
+	<table>
+		<thead>
+			<tr>
+				<th>商品名</th>
+				<th>単価（税込）</th>
+				<th>数量</th>
+				<th>小計</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @cart_items.each do |cart_item| %>
+			<tr>
+				<td><%= attachment_image_tag cart_item.product,:image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", :width => "60", :height => "60" %><%= cart_item.product.name %></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<table>
+		
+		<tbody>
+			<tr>
+				<th>送料</th>
+				<td></td>
+				<th></td>
+			    <td></td>
+			    <th></th>
+			    <td></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>支払方法</h4>
 
 
-<table>
-	<tr><th>送料</th></tr>
-	<tr><td></td></tr>
+    <h4>お届け先</h4>
 
-	<tr><th>商品合計</th></tr>
-	<tr><td></td></tr>
 
-	<tr><th>請求金額</th>></tr>
-	<tr><td></td></tr>
-</table>
+
+
+<% end %>
+
+
+
