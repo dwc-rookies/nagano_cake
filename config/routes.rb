@@ -18,7 +18,7 @@ end
     sessions: 'customer/customers/sessions',
     registrations: 'customer/customers/registrations',
 
-    
+
 
     passwords: 'customer/cuscustomers/passwords'
 

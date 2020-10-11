@@ -1,5 +1,6 @@
 <h1>注文情報確認</h1>
-<%= form_for (@order) do |f| %>
+
+
 	<table>
 		<thead>
 			<tr>
@@ -10,36 +11,60 @@
 			</tr>
 		</thead>
 		<tbody>
+
+
+
+			
 			<% @cart_items.each do |cart_item| %>
 			<tr>
 				<td><%= attachment_image_tag cart_item.product,:image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", :width => "60", :height => "60" %><%= cart_item.product.name %></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><%= price = (cart_item.product.tax_excluded_price * 1.1).floor %></td>
+				<td><%= cart_item.quantity %></td>
+				<td><%= price * cart_item.quantity %></td>
 			</tr>
+			<% total = price * cart_item.quantity + total %>
 			<% end %>
 		</tbody>
 	</table>
 
 	<table>
-		
+
 		<tbody>
 			<tr>
 				<th>送料</th>
-				<td></td>
-				<th></td>
-			    <td></td>
-			    <th></th>
-			    <td></td>
+				<% @order.postage = 800 %>
+				<td><%= @order.postage %></td>
+			</tr>
+			<tr>
+				<th>商品合計</td>
+			    <td><%= total %></td>
+			</th>
+			<tr>
+			    <th>請求金額</th>
+			    <% @order.charge = @order.postage + total %>
+			    <td><%= @order.charge %></td>
 			</tr>
 		</tbody>
 	</table>
 
 	<h4>支払方法</h4>
 
+　　<%= @pay %>
 
     <h4>お届け先</h4>
+    <%= @order.postcode %><%= @order.address %>
+    <%= @order.name %>
 
+
+<%= form_for(@order, url: order_completed_path) do |f| %>
+  <%= f.hidden_field :postcode, value: @order.postcode %>
+  <%= f.hidden_field :customer_id, value: current_customer.id %>
+  <%= f.hidden_field :postage, value: @order.postage %>
+  <%= f.hidden_field :charge, value: @order.charge %>
+  <%= f.hidden_field :address, value: @order.address %>
+  <%= f.hidden_field :name, value: @order.name %>
+  <%= f.hidden_field :pay, value: @order.pay %>
+  <%= f.submit "購入を確定する" %>
 
 
 
