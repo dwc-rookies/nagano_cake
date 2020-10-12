@@ -11,5 +11,5 @@ customers#withdraw
 
   <%=link_to"退会しない",customer_path(current_customer),class:"btn btn-primary"%>
 
-  <%=link_to"退会する",change_customer_path(@customer),method: :patch, class:"btn btn-danger"%>
+  <%=link_to"退会する",change_customer_path(@customer),method: :patch, "data-confirm" => "退会します", class:"btn btn-danger"%>
 </div>
