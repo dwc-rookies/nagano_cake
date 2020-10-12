@@ -1,7 +1,7 @@
 class Customer::HomeController < ApplicationController
 
   def top
-    @products = Product.limit(8).offset(4)
+    @products = Product.all
     @genres = Genre.where(is_active: true)
       genre_id = params[:genre_id]
       if genre_id.present?
@@ -13,3 +13,4 @@ class Customer::HomeController < ApplicationController
   end
 
 end
+

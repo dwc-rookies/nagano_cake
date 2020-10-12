@@ -1,46 +1,43 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-4 mt-1">
-      <h1>商品詳細</h1>
+    <h4 class="mt-4 ml-5 mb-5">商品詳細</h4>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
       <%= attachment_image_tag @product, :image, :fill, 300,300, format: "jpeg", class: "pull-left profile-img", fallback: "no_image.jpg", :width => "300", :height => "300" %>
     </div>
-    <div class="col-lg-8 mt-5">
+    <div class="col-lg-4">
       <table>
         <tr>
-          <td><label>商品名</label></td>
-          <td>
-            <%= @product.name %>
-          </td>
+          <td class="p-2">商品名</td>
+          <td class="p-2"><%= @product.name %></td>
         </tr>
         <tr>
-          <td><label>商品説明</label></td>
-          <td>
-            <%= @product.description %>
-          </td>
+          <td class="p-2">商品説明</td>
+          <td class="p-2"><%= @product.description %></td>
         </tr>
         <tr>
-          <td><label>ジャンル</label></td>
-          <td>
-            <%= @product.genre.name %>
-          </td>
+          <td class="p-2">ジャンル</td>
+          <td class="p-2"><%= @product.genre.name %></td>
         </tr>
         <tr>
-          <td><label>税込価格(税抜価格)</label></td>
-          <td>
-            <%= (@product.tax_excluded_price*1.1).floor %>
-            (<%= @product.tax_excluded_price %>)　円
-          </td>
+          <td class="p-2">税込価格(税抜価格)</td>
+          <td class="p-2"><%= (@product.tax_excluded_price*1.1).floor %>(<%= @product.tax_excluded_price %>) 円</td>
         </tr>
         <tr>
-          <td><label>販売ステータス</label></td>
-          <td>
+          <td class="p-2">販売ステータス</td>
+          <td class="p-2">
             <% if @product.is_active == true %>販売中
             <% else %>販売停止中
             <% end %>
           </td>
         </tr>
       </table>
-      <%= link_to '編集する', edit_admin_product_path(@product.id), class: "btn btn-sm btn-primary mt-2" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 offset-sm-9">
+      <%= link_to '編集する', edit_admin_product_path(@product.id), class: "btn btn-lg btn-primary mb-5" %>
     </div>
   </div>
 </div>
