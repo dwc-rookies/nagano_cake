@@ -1,5 +1,6 @@
 class Customer::OrdersController < ApplicationController
   before_action :authenticate_customer!
+
   def index
     @orders = current_customer.orders
   end
@@ -7,7 +8,7 @@ class Customer::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @ordered_products = OrderedProduct.where(order_id: @order.id)
-    if @order.id != current_customer.id
+    if @order.customer_id != current_customer.id
       redirect_to orders_path
     end
   end
@@ -24,12 +25,11 @@ class Customer::OrdersController < ApplicationController
 
 
       if params[:order][:pay] == "credit_card"
-         @pay = "クレジットカード"
+        @pay = "クレジットカード"
       else
-         @pay = "銀行振込"
+        @pay = "銀行振込"
       end
     end
-
     case params[:delivery_address_type]
     when "ご自身の住所"
       @order.postcode = current_customer.postcode
@@ -44,13 +44,11 @@ class Customer::OrdersController < ApplicationController
   end
 
   def create
-     @order = Order.new(order_params)
-     @cart_items = current_customer.cart_items
-     @order.save!
-     redirect_to root_path
+    @order = Order.new(order_params)
+    @cart_items = current_customer.cart_items
+    @order.save!
+    redirect_to order_completed_path
   end
-
-
 
   def complete
   end

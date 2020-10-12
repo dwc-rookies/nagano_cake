@@ -13,62 +13,102 @@
 </head>
 
 <body>
-  <header>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <header class="sticky-top">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
       <% if admin_admin_signed_in? %>
       <%= link_to admin_root_path do %>
       <p class="navbar-brand">ここにロゴを入れる</p>
-      <%= attachment_image_tag product, :image, :fill, 200, 150, fallback: "no_image.jpg", :width => "200", :height => "150" %>
       <% end %>
       <% else %>
       <%= link_to root_path do %>
       <p class="navbar-brand">ここにロゴを入れる</p>
       <% end %>
       <% end %>
-      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber"
-        aria-expanded="false" aria-label="ナビゲーションの切替">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="Navber">
-        <ul class="navbar-nav mr-auto navbar-right">
+        <ul class="navbar-nav ml-auto">
           <% if admin_admin_signed_in? %>
-          <li>管理者</li>
-          <li><%= link_to "商品一覧", admin_products_path %></li>
-          <li><%= link_to "会員一覧", admin_customers_path %></li>
-          <li><%= link_to "注文履歴一覧", admin_orders_path %></li>
-          <li><%= link_to "ジャンル一覧", admin_genres_path %></li>
-          <li><%= link_to "ログアウト", destroy_admin_admin_session_path, method: :delete %></li>
+          <li class="m-3">
+          <%= link_to admin_products_path do %>
+          <button type="button" class="btn page-link text-dark d-inline-block">商品一覧<span class="sr-only"></span></button>
+          <% end %>
+          </li>
+          <li class="m-3">
+          <%= link_to admin_customers_path do %>
+          <button type="button" class="btn page-link text-dark d-inline-block">会員一覧<span class="sr-only"></span></button>
+          <% end %>
+          </li>
+          <li class="m-3">
+          <%= link_to admin_orders_path do %>
+          <button type="button" class="btn page-link text-dark d-inline-block">注文履歴一覧<span class="sr-only"></span></button>
+          <% end %>
+          </li>
+          <li class="m-3">
+          <%= link_to admin_genres_path do %>
+          <button type="button" class="btn page-link text-dark d-inline-block">ジャンル一覧<span class="sr-only"></span></button>
+          <% end %>
+          </li>
+          <li class="m-3">
+          <%= link_to destroy_admin_admin_session_path, method: :delete do %>
+          <button type="button" class="btn page-link text-dark d-inline-block">ログアウト<span class="sr-only"></span></button>
+          <% end %>
+          </li>
+          <form class="form-inline m-3">
+            <input type="search" class="form-control mr-sm-2" placeholder="検索" aria-label="検索">
+          </form>
           <% elsif customer_signed_in? %>
-          <li>ユーザー</li>
-          <li><%= link_to "マイページ", customer_path %></li>
-          <li><%= link_to "商品一覧", products_path %></li>
-          <li><%= link_to "カート", cart_items_path %></li>
-          <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete %></li>
+          <li class="m-3 d-flex align-items-center">ようこそ、<%= current_customer.first_name %>さん！</li>
+          <li class="m-3">
+          <%= link_to customer_path do %>
+          <button type="button" class="btn page-link text-dark d-inline-block">マイページ<span class="sr-only"></span></button>
+          <% end %>
+          </li>
+          <li class="m-3">
+          <%= link_to products_path do %>
+          <button type="button" class="btn page-link text-dark d-inline-block">商品一覧<span class="sr-only"></span></button>
+          <% end %>
+          </li>
+          <li class="m-3">
+          <%= link_to cart_items_path do %>
+          <button type="button" class="btn page-link text-dark d-inline-block">カート<span class="sr-only"></span></button>
+          <% end %>
+          </li>
+          <li class="m-3">
+          <%= link_to destroy_customer_session_path, method: :delete do %>
+          <button type="button" class="btn page-link text-dark d-inline-block">ログアウト<span class="sr-only"></span></button>
+          <% end %>
+          </li>
           <% else %>
-          <li>ゲストユーザー</li>
-          <li><%= link_to "About", about_path %></li>
-          <li><%= link_to "商品一覧", products_path %></li>
-          <li><%= link_to "新規登録", new_customer_registration_path %></li>
-          <li><%= link_to "ログイン", new_customer_session_path %></li>
+          <li class="m-3">
+          <%= link_to about_path do %>
+          <button type="button" class="btn page-link text-dark d-inline-block">About<span class="sr-only"></span></button>
+          <% end %>
+          </li>
+          <li class="m-3">
+          <%= link_to products_path do %>
+          <button type="button" class="btn page-link text-dark d-inline-block">商品一覧<span class="sr-only"></span></button>
+          <% end %>
+          </li>
+          <li class="m-3">
+          <%= link_to new_customer_registration_path do %>
+          <button type="button" class="btn page-link text-dark d-inline-block">新規登録<span class="sr-only"></span></button>
+          <% end %>
+          </li>
+          <li class="m-3">
+          <%= link_to new_customer_session_path do %>
+          <button type="button" class="btn page-link text-dark d-inline-block">ログイン<span class="sr-only"></span></button>
+          <% end %>
+          </li>
           <% end %>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索...">
-          <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
-        </form>
-      </div>
     </nav>
-
-
   </header>
 
+<div class="mb-5">
   <%= yield %>
+</div>
 
-  <footer>
-    <nav class="navbar navbar-default">
-      <p>フッター</p>
+  <footer class="fixed-bottom">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <div class="m-4"></div>
     </nav>
   </footer>
 
