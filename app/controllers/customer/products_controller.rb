@@ -7,6 +7,7 @@ class Customer::ProductsController < ApplicationController
     if genre_id.present? #もしジャンルidパラメータが存在するなら、そのジャンルの製品のみを抽出する。
       @products = @products.where(genre_id: genre_id)
     end
+    @products = @products.page(params[:page]).per(5)
   end
 
   def show

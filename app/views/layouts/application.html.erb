@@ -19,7 +19,6 @@
       <% if admin_admin_signed_in? %>
       <%= link_to admin_root_path do %>
       <p class="navbar-brand">ここにロゴを入れる</p>
-      <%= attachment_image_tag product, :image, :fill, 200, 150, fallback: "no_image.jpg", :width => "200", :height => "150" %>
       <% end %>
       <% else %>
       <%= link_to root_path do %>
