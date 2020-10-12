@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row">
-    <h1>商品編集画面</h1>
-    <%= form_for([:admin, @product]) do |f| %> #namespaceがあるため、[:admin, @product]と記述する。
+    <h4 class="mt-4 ml-5 mb-5">商品編集画面</h4>
+  </div>
+  <div class="row">
+
     <% if @product.errors.any? %>
     <div class="text-danger">
       <h3><%= @product.errors.count %> errors prohibited this obj from being saved:</h3>
@@ -12,37 +14,44 @@
       </ul>
     </div>
     <% end %>
-    <%= attachment_image_tag @product, :image, :fill, 300,300, format: "jpeg", class: "pull-left profile-img", fallback: "no_image.jpg", :width => "300", :height => "300" %>
-    <%= f.attachment_field :image %>
-    <table>
-      <tr>
-        <td><label>商品名</label></td>
-        <td>
-          <%= f.text_field :name %>
-        </td>
-      </tr>
-      <tr>
-        <td><label>商品説明</label></td>
-        <td>
-          <%= f.text_field :description %>
-        </td>
-      </tr>
-      <tr>
-        <td><label>ジャンル</label></td>
-        <td><%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => "--選択してください--" %>
-        </td>
-      <tr>
-        <td><label>税抜価格</label></td>
-        <td>
-          <%= f.text_field :tax_excluded_price %>円</td>
-      </tr>
-      <tr>
-        <td><label>販売ステータス</label></td>
-        <td>
-          <%= f.select :is_active, [["販売中", true], ["販売停止中", false]] %><br>
-        </td>
-    </table>
-    <%= f.submit "変更を保存", class: "btn btn-sm btn-primary mt-2" %>
-    <% end %>
+
+  </div>
+
+  <%= form_for([:admin, @product]) do |f| %>
+  <div class="row">
+    <div class="col-sm-4">
+      <%= attachment_image_tag @product, :image, :fill, 300,300, format: "jpeg", class: "pull-left profile-img", fallback: "no_image.jpg", :width => "300", :height => "300" %>
+      <div class="mt-2"><%= f.attachment_field :image %></div>
+    </div>
+
+    <div class="col-sm-6">
+      <table>
+        <tr>
+          <td class="p-2 float-right">商品名</td>
+          <td class="p-2"><%= f.text_field :name, :size => "30*30" %></td>
+        </tr>
+        <tr>
+          <td class="p-2 float-right">商品説明</td>
+          <td class="p-2"><%= f.text_area :description, :size => "30*100" %></td>
+        </tr>
+        <tr>
+          <td class="p-2 float-right">ジャンル</td>
+          <td class="p-2"><%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => "--選択してください--" %></td>
+          </tr>
+        <tr>
+          <td class="p-2 float-right">抜価格</td>
+          <td class="p-2"><%= f.text_field :tax_excluded_price, :size => "30*30" %><span class="p-1">円</span></td>
+        </tr>
+        <tr>
+          <td class="p-2 float-right">販売ステータス</td>
+          <td class="p-2"><%= f.select :is_active, [["販売中", true], ["販売停止中", false]] %></td>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 offset-sm-9">
+      <%= f.submit "変更を保存", class: "btn btn-lg btn-primary mb-5" %>
+      <% end %>
+    </div>
   </div>
 </div>
