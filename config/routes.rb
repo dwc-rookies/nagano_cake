@@ -47,9 +47,9 @@ scope module: 'customer' do
   patch 'customer/change' => 'customers#change',
   as: 'change_customer'
   resources :deliveries, only: [:index, :create, :edit, :update, :destroy]
-  resources :orders, only: [:index, :show, :new, :create]
+  get 'orders/complete' => 'orders#complete', as: 'order_completed'
   post 'orders/confirm' => 'orders#confirm', as: 'confirm_order'
-  post 'orders/complete' => 'orders#complete', as: 'order_completed'
+  resources :orders, only: [:index, :show, :new, :create]
   resources :products, only: [:index, :show]
 end
 
