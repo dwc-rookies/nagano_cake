@@ -66,7 +66,7 @@ gem "refile-mini_magick"
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 
 # レイアウト調整他
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 
 # ログイン機能
