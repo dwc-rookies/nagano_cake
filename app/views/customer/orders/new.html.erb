@@ -3,9 +3,9 @@
 
   <h4>支払方法</h4>
   <%= f.radio_button :pay, :credit_card %>
-  <%= f.label :クレジットカード　%>
+  <%= f.label :クレジットカード %>
   <%= f.radio_button :pay, :bank_transfer %>
-  <%= f.label :銀行振込　%>
+  <%= f.label :銀行振込 %>
 
   <h4>お届け先</h4>
    <%= radio_button_tag :delivery_address_type, "ご自身の住所" %>
@@ -31,6 +31,6 @@
 
 
 
-　<%= f.submit '確認画面に進む' %>
+ <%= f.submit '確認画面に進む' %>
 <% end %>
 
