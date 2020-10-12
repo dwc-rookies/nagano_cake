@@ -7,6 +7,9 @@ class Customer::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @ordered_products = OrderedProduct.where(order_id: @order.id)
+    if @order.id != current_customer.id
+      redirect_to orders_path
+    end
   end
 
   def new
