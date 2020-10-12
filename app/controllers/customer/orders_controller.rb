@@ -7,7 +7,7 @@ class Customer::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @ordered_products = OrderedProduct.where(order_id: @order.id)
-    if @order.id != current_customer.id
+    if @order.customer.id != current_customer.id
       redirect_to orders_path
     end
   end
@@ -46,8 +46,20 @@ class Customer::OrdersController < ApplicationController
   def create
      @order = Order.new(order_params)
      @cart_items = current_customer.cart_items
-     @order.save!
-     redirect_to root_path
+     @order.save
+
+      current_customer.cart_items.each do |ordered_product|
+            @ordered_product = OrderedProduct.new(
+            order_id: @order.id,
+            product_id: ordered_product.product.id,
+            purchase_money: ordered_product.product.tax_excluded_price,
+            quantity: ordered_product.quantity,
+            )
+            @ordered_product.save!
+        end
+
+     @cart_items.destroy_all
+     redirect_to order_completed_path
   end
 
 

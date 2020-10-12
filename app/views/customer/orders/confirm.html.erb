@@ -56,7 +56,7 @@
     <%= @order.name %>
 
 
-<%= form_for(@order, url: order_completed_path) do |f| %>
+<%= form_for(@order) do |f| %>
   <%= f.hidden_field :postcode, value: @order.postcode %>
   <%= f.hidden_field :customer_id, value: current_customer.id %>
   <%= f.hidden_field :postage, value: @order.postage %>
