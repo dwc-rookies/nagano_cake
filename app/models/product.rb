@@ -12,4 +12,12 @@ class Product < ApplicationRecord
 
   attachment :image
 
+  def self.search(search)
+    if search
+      Product.where(['name LIKE ?', "%#{search}%"])
+    else
+      Product.all
+    end
+  end
+
 end

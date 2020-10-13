@@ -8,23 +8,23 @@
   <div class="row">
     <table class="mb-5">
       <tr>
-        <td class="p-2">購入者</td>
-        <td class="p-2">
+        <td class="px-3 py-2">購入者</td>
+        <td class="px-3 py-2">
         <%= link_to admin_customer_path(@order.customer) do %>
         <%= @order.customer.first_name+@order.customer.last_name %>
         <% end %>
         </td>
       </tr>
       <tr>
-        <td class="p-2 align-top">配送先</td>
-        <td class="p-2">
+        <td class="px-3 py-2 align-top">配送先</td>
+        <td class="px-3 py-2">
         <%= @order.postcode+@order.address %><br>
         <%= @order.name %>
         </td>
       </tr>
       <tr>
-        <td class="p-2">支払方法</td>
-        <td class="p-2">
+        <td class="px-3 py-2">支払方法</td>
+        <td class="px-3 py-2">
         <% if @order.pay == 0 %>
         クレジットカード
         <% else %>
@@ -33,8 +33,8 @@
         </td>
       </tr>
       <tr>
-        <td class="p-2">注文ステータス</td>
-        <td class="p-2">
+        <td class="px-3 py-2">注文ステータス</td>
+        <td class="px-3 py-2">
       <%= form_for(@order, url: admin_order_path(@order)) do |f| %>
           <%= f.select :status, [["入金待ち", 0], ["入金確認", 1], ["制作中", 2], ["発送準備中", 3], ["発送済み", 4]], selected: @order.status %>
       <%= f.submit "更新", class: "btn btn-primary btn-sm" %>
@@ -45,8 +45,8 @@
   </div>
 
   <div class="row mb-5">
-    <div class="col-sm-9">
-      <table>
+    <div class="col-sm-7">
+      <table width="300" class="table table-hover">
         <tr>
           <th class="p-2">商品名</th>
           <th class="p-2">単価（税込）</th>
@@ -56,11 +56,11 @@
         </tr>
         <% @ordered_products.each do |ordered_product| %>
         <tr>
-          <td class="p-2"><%= ordered_product.product.name %></td>
-          <td class="p-2"><%= (ordered_product.product.tax_excluded_price * 1.1).floor %></td>
-          <td class="p-2"><%= ordered_product.quantity %></td>
-          <td class="p-2"><%= (ordered_product.product.tax_excluded_price * 1.1 * ordered_product.quantity).floor %></td>
-          <td class="p-2">
+          <td class="p-3"><%= ordered_product.product.name %></td>
+          <td class="p-3"><%= (ordered_product.product.tax_excluded_price * 1.1).floor.to_s(:delimited) %>円</td>
+          <td class="p-3"><%= ordered_product.quantity %></td>
+          <td class="p-3"><%= (ordered_product.product.tax_excluded_price * 1.1 * ordered_product.quantity).floor.to_s(:delimited) %>円</td>
+          <td class="p-3">
           <%= form_for(ordered_product, url: admin_ordered_product_path(ordered_product)) do |f| %>
           <%= f.select :production_status, [["着手不可", 0], ["制作待ち", 1], ["制作中", 2], ["制作完了", 3]], selected: ordered_product.production_status %>
           <%= f.submit "更新", class: "btn btn-primary btn-sm" %>
@@ -71,19 +71,19 @@
       </table>
     </div>
 
-    <div class="col-sm-2 offset-sm-1">
-      <table>
+    <div class="col-sm-4 offset-sm-1 align-self-end">
+      <table class="m-auto">
         <tr>
-          <td class="p-2">商品合計</td>
-          <td class="p-2"><%= @order.charge - @order.postage %></td>
+          <td class="p-1"><h5>商品合計</h5></td>
+          <td class="p-1"><h5><%= (@order.charge - @order.postage).to_s(:delimited) %>円</h5></td>
         </tr>
         <tr>
-          <td class="p-2">送料</td>
-          <td class="p-2"><%= @order.postage %></td>
+          <td class="p-1"><h5>送料</h5></td>
+          <td class="p-1"><h5><%= @order.postage.to_s(:delimited) %>円</h5></td>
         </tr>
         <tr>
-          <td class="p-2">請求金額合計</td>
-          <td class="p-2"><%= @order.charge %></td>
+          <td class="p-1"><h5><strong>請求金額合計</strong></h5></td>
+          <td class="p-1"><h5><strong><%= @order.charge.to_s(:delimited) %>円</strong></h5></td>
         </tr>
       </table>
     </div>

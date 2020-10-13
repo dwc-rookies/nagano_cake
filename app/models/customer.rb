@@ -19,4 +19,12 @@ class Customer < ApplicationRecord
     super && (self.is_deleated == false)
   end
 
+  def self.search(search)
+    if search
+      Customer.where(['last_name LIKE ? OR first_name LIKE ?', "%#{search}%", "%#{search}%"])
+    else
+      Customer.all
+    end
+  end
+
 end
