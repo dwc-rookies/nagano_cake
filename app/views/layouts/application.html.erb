@@ -14,100 +14,114 @@
 
 <body class="d-flex flex-column" style="min-height: 100vh">
   <header class="sticky-top">
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
       <% if admin_admin_signed_in? %>
       <%= link_to admin_root_path do %>
-      <p class="navbar-brand">ここにロゴを入れる</p>
+      <%= image_tag 'nagano_cake_clear2.png', size: "260x100", class:'navbar-brand' %>
       <% end %>
       <% else %>
       <%= link_to root_path do %>
-      <p class="navbar-brand">ここにロゴを入れる</p>
+      <%= image_tag 'nagano_cake_clear2.png', size: "260x100", class:'navbar-brand' %>
       <% end %>
       <% end %>
-        <ul class="navbar-nav ml-auto">
-          <% if admin_admin_signed_in? %>
-          <li class="m-3">
+      <ul class="navbar-nav ml-auto">
+        <% if admin_admin_signed_in? %>
+        <li class="m-3">
           <%= link_to admin_products_path do %>
-          <button type="button" class="btn page-link text-dark d-inline-block">商品一覧<span class="sr-only"></span></button>
+          <button type="button" class="btn page-link text-dark d-inline-block">商品一覧<span
+              class="sr-only"></span></button>
           <% end %>
-          </li>
-          <li class="m-3">
+        </li>
+        <li class="m-3">
           <%= link_to admin_customers_path do %>
-          <button type="button" class="btn page-link text-dark d-inline-block">会員一覧<span class="sr-only"></span></button>
+          <button type="button" class="btn page-link text-dark d-inline-block">会員一覧<span
+              class="sr-only"></span></button>
           <% end %>
-          </li>
-          <li class="m-3">
+        </li>
+        <li class="m-3">
           <%= link_to admin_orders_path do %>
-          <button type="button" class="btn page-link text-dark d-inline-block">注文履歴一覧<span class="sr-only"></span></button>
+          <button type="button" class="btn page-link text-dark d-inline-block">注文履歴一覧<span
+              class="sr-only"></span></button>
           <% end %>
-          </li>
-          <li class="m-3">
+        </li>
+        <li class="m-3">
           <%= link_to admin_genres_path do %>
-          <button type="button" class="btn page-link text-dark d-inline-block">ジャンル一覧<span class="sr-only"></span></button>
+          <button type="button" class="btn page-link text-dark d-inline-block">ジャンル一覧<span
+              class="sr-only"></span></button>
           <% end %>
-          </li>
-          <li class="m-3">
+        </li>
+        <li class="m-3">
           <%= link_to destroy_admin_admin_session_path, method: :delete do %>
-          <button type="button" class="btn page-link text-dark d-inline-block">ログアウト<span class="sr-only"></span></button>
+          <button type="button" class="btn page-link text-dark d-inline-block">ログアウト<span
+              class="sr-only"></span></button>
           <% end %>
-          </li>
-          <form class="form-inline m-3">
-            <input type="search" class="form-control mr-sm-2" placeholder="検索" aria-label="検索">
-          </form>
-          <% elsif customer_signed_in? %>
-          <li class="m-3 d-flex align-items-center">ようこそ、<%= current_customer.first_name %>さん！</li>
-          <li class="m-3">
+        </li>
+        <div class="m-3 form-inline">
+          <%= form_tag(admin_search_path, method: :get, class: "", id:"") do %>
+          <%= text_field_tag :search %>
+          <% end %>
+        </div>
+        <% elsif customer_signed_in? %>
+        <li class="m-3 d-flex align-items-center">ようこそ、<%= current_customer.first_name %>さん！</li>
+        <li class="m-3">
           <%= link_to customer_path do %>
-          <button type="button" class="btn page-link text-dark d-inline-block">マイページ<span class="sr-only"></span></button>
+          <button type="button" class="btn page-link text-dark d-inline-block">マイページ<span
+              class="sr-only"></span></button>
           <% end %>
-          </li>
-          <li class="m-3">
+        </li>
+        <li class="m-3">
           <%= link_to products_path do %>
-          <button type="button" class="btn page-link text-dark d-inline-block">商品一覧<span class="sr-only"></span></button>
+          <button type="button" class="btn page-link text-dark d-inline-block">商品一覧<span
+              class="sr-only"></span></button>
           <% end %>
-          </li>
-          <li class="m-3">
+        </li>
+        <li class="m-3">
           <%= link_to cart_items_path do %>
           <button type="button" class="btn page-link text-dark d-inline-block">カート<span class="sr-only"></span></button>
           <% end %>
-          </li>
-          <li class="m-3">
+        </li>
+        <li class="m-3">
           <%= link_to destroy_customer_session_path, method: :delete do %>
-          <button type="button" class="btn page-link text-dark d-inline-block">ログアウト<span class="sr-only"></span></button>
+          <button type="button" class="btn page-link text-dark d-inline-block">ログアウト<span
+              class="sr-only"></span></button>
           <% end %>
-          </li>
-          <% else %>
-          <li class="m-3">
+        </li>
+        <% else %>
+        <li class="m-3">
           <%= link_to about_path do %>
-          <button type="button" class="btn page-link text-dark d-inline-block">About<span class="sr-only"></span></button>
+          <button type="button" class="btn page-link text-dark d-inline-block">About<span
+              class="sr-only"></span></button>
           <% end %>
-          </li>
-          <li class="m-3">
+        </li>
+        <li class="m-3">
           <%= link_to products_path do %>
-          <button type="button" class="btn page-link text-dark d-inline-block">商品一覧<span class="sr-only"></span></button>
+          <button type="button" class="btn page-link text-dark d-inline-block">商品一覧<span
+              class="sr-only"></span></button>
           <% end %>
-          </li>
-          <li class="m-3">
+        </li>
+        <li class="m-3">
           <%= link_to new_customer_registration_path do %>
-          <button type="button" class="btn page-link text-dark d-inline-block">新規登録<span class="sr-only"></span></button>
+          <button type="button" class="btn page-link text-dark d-inline-block">新規登録<span
+              class="sr-only"></span></button>
           <% end %>
-          </li>
-          <li class="m-3">
+        </li>
+        <li class="m-3">
           <%= link_to new_customer_session_path do %>
-          <button type="button" class="btn page-link text-dark d-inline-block">ログイン<span class="sr-only"></span></button>
+          <button type="button" class="btn page-link text-dark d-inline-block">ログイン<span
+              class="sr-only"></span></button>
           <% end %>
-          </li>
-          <% end %>
-        </ul>
+        </li>
+        <% end %>
+      </ul>
     </nav>
   </header>
-
-<main class="mb-auto">
-  <%= yield %>
-</main>
+  <%= render 'layouts/flashes' %>
+  <main class="mb-auto">
+    <%= yield %>
+  </main>
 
   <footer>
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
       <div class="m-4"></div>
     </nav>
   </footer>

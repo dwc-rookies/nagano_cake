@@ -13,7 +13,7 @@ class Customer::ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @cart_item = CartItem.new
-    @genres = Genre.all
+    @genres = Genre.where(is_active: true)
     if @product.is_active == false or @product.genre.is_active == false
       redirect_to products_path
     end

@@ -22,7 +22,7 @@
         </tr>
         <tr>
           <td class="p-2">税込価格(税抜価格)</td>
-          <td class="p-2"><%= (@product.tax_excluded_price*1.1).floor %>(<%= @product.tax_excluded_price %>) 円</td>
+          <td class="p-2"><%= (@product.tax_excluded_price*1.1).floor.to_s(:delimited) %>(<%= @product.tax_excluded_price.to_s(:delimited) %>) 円</td>
         </tr>
         <tr>
           <td class="p-2">販売ステータス</td>
