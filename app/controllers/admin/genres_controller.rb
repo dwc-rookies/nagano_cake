@@ -13,7 +13,8 @@ class Admin::GenresController < ApplicationController
       redirect_to request.referer
     else
       @genres=Genre.all
-      redirect_to request.referer
+      flash.now[:error]="入力内容に誤りがあります。"
+      render 'index'
     end
   end
 
@@ -25,8 +26,9 @@ class Admin::GenresController < ApplicationController
     @genre=Genre.find(params[:id])
     if @genre.update(genre_params)
       flash[:notice]="ジャンルを編集しました。"
-      redirect_to  admin_genres_path
+      redirect_to admin_genres_path
     else
+      flash.now[:error]="入力内容に誤りがあります。"
       render :edit
   end
 end

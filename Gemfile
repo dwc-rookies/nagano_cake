@@ -71,6 +71,12 @@ gem 'jquery-rails'
 
 # ログイン機能
 gem 'devise'
+# ログイン機能日本語化
+gem 'devise-i18n'
+gem 'devise-i18n-views'
+
+# バリデーションエラーメッセージ日本語化
+gem 'rails-i18n'
 
 # ページング機能
 gem 'kaminari','~> 1.2.1'

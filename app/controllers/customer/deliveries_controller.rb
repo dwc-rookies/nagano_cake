@@ -9,8 +9,13 @@ class Customer::DeliveriesController < ApplicationController
   def create
     @delivery = Delivery.new(delivery_params)
     @delivery.customer_id = current_customer.id
-    @delivery.save
-    redirect_to deliveries_path(@delivery.id)
+    if @delivery.save
+      flash[:notice]="配送先を追加しました。"
+      redirect_to deliveries_path(@delivery.id)
+    else
+      flash.now[:error]="入力内容に誤りがあります。"
+      render 'index'
+    end
   end
 
   def edit
@@ -19,13 +24,19 @@ class Customer::DeliveriesController < ApplicationController
 
   def update
     @delivery = Delivery.find(params[:id])
-    @delivery.update(delivery_params)
-    redirect_to deliveries_path(@delivery.id)
+    if @delivery.update(delivery_params)
+      flash[:notice]="配送先を編集しました。"
+      redirect_to deliveries_path(@delivery.id)
+    else
+      flash.now[:error]="入力内容に誤りがあります。"
+      render 'edit'
+    end
   end
 
   def destroy
     delivery = Delivery.find(params[:id])
     delivery.destroy
+    flash[:notice]="配送先を削除しました。"
     redirect_to deliveries_path
   end
 

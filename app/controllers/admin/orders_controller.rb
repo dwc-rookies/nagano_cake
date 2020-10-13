@@ -3,7 +3,14 @@ class Admin::OrdersController < ApplicationController
 
   def index
     # @orders = Order.all.order(created_at: "DESC")
-    @orders = Order.page(params[:page]).per(10).order(created_at: "DESC")
+    # 会員詳細ページから遷移した場合はその会員の注文データを表示する。
+    order_check = params[:order_check].to_i # 会員詳細ページからのlink_toメソッドには会員idを付加している。
+    if order_check >= 1
+      @orders = Order.where(customer_id: order_check)
+    else
+      @orders = Order.all
+    end
+    @orders = @orders.page(params[:page]).per(10).order(created_at: "DESC")
   end
 
   def show
@@ -21,8 +28,9 @@ class Admin::OrdersController < ApplicationController
         ordered_product.update(production_status: 1)
       end
     end
-    flash[:notice] = "注文ステータスを更新しました。"
-    redirect_back(fallback_location: admin_orders_path)
+    flash.now[:notice] = "注文ステータスを更新しました。"
+    @update_order = true
+    render 'show'
   end
 
   private

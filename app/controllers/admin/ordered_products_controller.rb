@@ -16,8 +16,11 @@ class Admin::OrderedProductsController < ApplicationController
         ordered_product.order.update(status: 3)
       end
     end
-    flash[:notice] = "製品ステータスを更新しました。"
-    redirect_back(fallback_location: admin_orders_path)
+    flash.now[:notice] = "製品ステータスを更新しました。"
+    @order = Order.find(ordered_product.order.id)
+    @ordered_products = OrderedProduct.where(order_id: @order.id)
+    @update_product = ordered_product.id
+    render template: "admin/orders/show"
   end
 
   private

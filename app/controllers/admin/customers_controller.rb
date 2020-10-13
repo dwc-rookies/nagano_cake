@@ -19,6 +19,7 @@ class Admin::CustomersController < ApplicationController
       flash[:notice]="会員情報を編集しました。"
       redirect_to admin_customers_path
     else
+      flash.now[:error]="入力内容に誤りがあります。"
       render:edit
     end
   end
