@@ -12,7 +12,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
-<body>
+<body class="d-flex flex-column" style="min-height: 100vh">
   <header class="sticky-top">
     <nav class="navbar navbar-expand-md navbar-light bg-light">
       <% if admin_admin_signed_in? %>
@@ -102,9 +102,9 @@
     </nav>
   </header>
 
-<div class="mb-5">
+<main class="mb-auto">
   <%= yield %>
-</div>
+</main>
 
   <footer>
     <nav class="navbar navbar-expand-md navbar-light bg-light">
