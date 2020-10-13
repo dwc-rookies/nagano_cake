@@ -44,12 +44,6 @@ class Customer::OrdersController < ApplicationController
   end
 
   def create
-<<<<<<< HEAD
-    @order = Order.new(order_params)
-    @cart_items = current_customer.cart_items
-    @order.save!
-    redirect_to order_completed_path
-=======
      @order = Order.new(order_params)
      @cart_items = current_customer.cart_items
      @order.save
@@ -66,7 +60,6 @@ class Customer::OrdersController < ApplicationController
 
      @cart_items.destroy_all
      redirect_to order_completed_path
->>>>>>> origin/develop
   end
 
   def complete
