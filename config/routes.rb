@@ -5,10 +5,7 @@ Rails.application.routes.draw do
     devise_for :admins, controllers: {
     sessions: 'admin/admins/sessions',
     registrations: 'admin/admins/registrations',
-
-
     passwords: 'admin/admins/passwords'
-
   }
 end
 
@@ -17,11 +14,7 @@ end
   devise_for :customers, controllers: {
     sessions: 'customer/customers/sessions',
     registrations: 'customer/customers/registrations',
-
-
-
     passwords: 'customer/cuscustomers/passwords'
-
   }
 end
 
@@ -34,6 +27,7 @@ namespace :admin do
   resources :ordered_products, only: [:update]
   resources :orders, only: [:index, :show, :update]
   resources :products, only: [:index, :show, :new, :create, :edit, :update]
+  get 'search' => 'search#search'
 end
 
 # customer側のルーティング

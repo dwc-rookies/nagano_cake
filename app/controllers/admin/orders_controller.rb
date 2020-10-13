@@ -3,7 +3,7 @@ class Admin::OrdersController < ApplicationController
 
   def index
     # @orders = Order.all.order(created_at: "DESC")
-    @orders = Order.page(params[:page]).per(5).order(created_at: "DESC")
+    @orders = Order.page(params[:page]).per(10).order(created_at: "DESC")
   end
 
   def show
@@ -21,7 +21,7 @@ class Admin::OrdersController < ApplicationController
         ordered_product.update(production_status: 1)
       end
     end
-    flash[:notice] = "You have updated order successfully."
+    flash[:notice] = "注文ステータスを更新しました。"
     redirect_back(fallback_location: admin_orders_path)
   end
 

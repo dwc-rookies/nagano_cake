@@ -39,7 +39,7 @@
           <td class="p-2"><%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => "--選択してください--" %></td>
           </tr>
         <tr>
-          <td class="p-2 float-right">抜価格</td>
+          <td class="p-2 float-right">税抜価格</td>
           <td class="p-2"><%= f.text_field :tax_excluded_price, :size => "30*30" %><span class="p-1">円</span></td>
         </tr>
         <tr>

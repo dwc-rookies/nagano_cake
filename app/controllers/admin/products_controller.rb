@@ -2,7 +2,7 @@ class Admin::ProductsController < ApplicationController
   before_action :authenticate_admin_admin!
 
   def index
-    @products = Product.page(params[:page]).per(5)
+    @products = Product.page(params[:page]).per(10)
   end
 
   def show
@@ -16,7 +16,7 @@ class Admin::ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      flash[:notice] = "You have creatad product successfully."
+      flash[:notice] = "新たな商品を登録しました。"
       redirect_to admin_product_path(@product.id)
     else
       render 'new'
@@ -30,7 +30,7 @@ class Admin::ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if @product.update(product_params)
-      flash[:notice] = "You have updated product successfully."
+      flash[:notice] = "商品の内容を編集しました。"
       redirect_to admin_product_path(@product.id)
     else
       render 'edit'
