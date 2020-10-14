@@ -4,6 +4,7 @@
   </div>
   <div class="row">
 
+    <% if false %>
     <% if @product.errors.any? %>
     <div class="text-danger">
       <h3><%= @product.errors.count %> errors prohibited this obj from being saved:</h3>
@@ -14,14 +15,15 @@
       </ul>
     </div>
     <% end %>
+    <% end %>
 
   </div>
-
   <%= form_for([:admin, @product]) do |f| %>
   <div class="row">
     <div class="col-sm-4">
-      <%= attachment_image_tag @product, :image, :fill, 300,300, format: "jpeg", class: "pull-left profile-img", fallback: "no_image.jpg", :width => "300", :height => "300" %>
-      <div class="mt-2"><%= f.attachment_field :image %></div>
+
+      <%= attachment_image_tag @product, :image, :fill, 300,300, format: "jpeg", fallback: 'no-image.png', onClick: "$('.img_field').click()", class: "center-block img-thumbnail img-responsive img_prev pull-left profile-img", fallback: "no_image.jpg", :width => "300", :height => "300" %>
+      <div class="mt-2"><%= f.attachment_field :image, class: 'img_field' %></div>
     </div>
 
     <div class="col-sm-6">
@@ -37,7 +39,7 @@
         <tr>
           <td class="p-2 float-right">ジャンル</td>
           <td class="p-2"><%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => "--選択してください--" %></td>
-          </tr>
+        </tr>
         <tr>
           <td class="p-2 float-right">税抜価格</td>
           <td class="p-2"><%= f.text_field :tax_excluded_price, :size => "30*30" %><span class="p-1">円</span></td>

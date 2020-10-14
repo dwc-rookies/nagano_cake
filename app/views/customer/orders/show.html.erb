@@ -1,12 +1,14 @@
 <div class="container">
   <div class="row">
-    <h3>注文履歴詳細</h3>
+    <div class="col-sm-4">
+      <h2 class="mt-4 mb-3 pl-4 ml-5 bg-light text-black">注文履歴詳細</h2>
+    </div>
   </div>
 
-  <div class="row">
-    <div class="col-xs-6">
+  <div class="row mt-3">
+    <div class="col-sm-8">
       <h4>注文情報</h4>
-      <table class="table table-striped table-hover">
+      <table class="table table-bordered table-hover">
         <tr>
           <td>注文日</td>
           <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
@@ -42,29 +44,30 @@
         </tr>
       </table>
     </div>
-    <div class="col-xs-4">
+
+    <div class=" col-sm-3">
       <h4>請求情報</h4>
-      <table class="table table-striped table-hover">
+      <table class="table table-bordered table-hover">
         <tr>
           <td>商品合計</td>
-          <td><%= @order.charge - @order.postage %></td>
+          <td><%= (@order.charge - @order.postage).to_s(:delimited) %></td>
         </tr>
         <tr>
           <td>配送料</td>
-          <td><%= @order.postage %></td>
+          <td><%= @order.postage.to_s(:delimited) %></td>
         </tr>
         <tr>
           <td>ご請求額</td>
-          <td><%= @order.charge %></td>
+          <td><%= @order.charge.to_s(:delimited) %></td>
         </tr>
       </table>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-xs-10">
+  <div class="row my-3">
+    <div class="col-sm-9">
     <h4>注文内容</h4>
-      <table class="table table-striped table-hover">
+      <table class="table table-bordered table-hover">
         <tr>
           <th>商品</th>
           <th>単価（税込）</th>
@@ -74,9 +77,9 @@
         <% @ordered_products.each do |ordered_product| %>
         <tr>
           <td><%= ordered_product.product.name %></td>
-          <td><%= (ordered_product.product.tax_excluded_price * 1.1).floor %></td>
+          <td><%= (ordered_product.product.tax_excluded_price * 1.1).floor.to_s(:delimited) %></td>
           <td><%= ordered_product.quantity %></td>
-          <td><%= (ordered_product.product.tax_excluded_price * 1.1 * ordered_product.quantity).floor %></td>
+          <td><%= (ordered_product.product.tax_excluded_price * 1.1 * ordered_product.quantity).floor.to_s(:delimited) %></td>
         </tr>
         <% end %>
       </table>

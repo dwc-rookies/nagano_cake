@@ -19,6 +19,7 @@ class Admin::ProductsController < ApplicationController
       flash[:notice] = "新たな商品を登録しました。"
       redirect_to admin_product_path(@product.id)
     else
+      flash.now[:error]="入力内容に誤りがあります。"
       render 'new'
     end
   end
@@ -30,9 +31,10 @@ class Admin::ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if @product.update(product_params)
-      flash[:notice] = "商品の内容を編集しました。"
+      flash[:notice] = "商品内容を編集しました。"
       redirect_to admin_product_path(@product.id)
     else
+      flash.now[:error]="入力内容に誤りがあります。"
       render 'edit'
     end
   end

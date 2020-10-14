@@ -8,8 +8,12 @@ class Customer < ApplicationRecord
   validates :last_name_kana, presence: true
   validates :first_name_kana, presence: true
   validates :postcode, presence: true
+  validates :postcode, numericality: {only_integer: true}
+  validates :postcode, length: { minimum: 7 }
   validates :address, presence: true
   validates :phone_number, presence: true
+  validates :phone_number, numericality: {only_integer: true}
+  validates :phone_number, length: { minimum: 9 }
   validates :is_deleated, inclusion: {in: [true, false]}
 
   has_many :deliveries, dependent: :destroy

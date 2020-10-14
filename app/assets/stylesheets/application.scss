@@ -339,3 +339,13 @@
     font-size: 14px;
   }
 }
+
+.img_prev:hover {
+  cursor: pointer; 
+  opacity: 0.7;
+  transform: scale(1.01, 1.01);
+}
+
+.pagination {
+  justify-content: center;
+}

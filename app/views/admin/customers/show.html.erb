@@ -14,9 +14,9 @@
           <td>顧客ID</td>
           <td><%= @customer.id%>
             <% if @customer.is_deleated==false %>
-            <span class="gadge badge-primary">有効会員</span>
+            <span class="badge badge-primary">有効会員</span>
             <% else %>
-            <span class="gadge badge-danger"">退会済み</span>
+            <span class="badge badge-danger">退会済み</span>
             <% end %>
           </td>
         </tr>
@@ -35,7 +35,7 @@
 
         <tr>
           <td>郵便番号</td>
-          <td><%=@customer.postcode%></td>
+          <td>〒<%=@customer.postcode%></td>
         </tr>
 
         <tr>
@@ -58,7 +58,7 @@
 
   <div class="row">
     <%=link_to "編集する",edit_admin_customer_path,class: "btn btn-primary mx-3"%>
-    <%=link_to"注文履歴一覧を見る",admin_orders_path,class: "btn btn-primary mx-3"%><br>
+    <%=link_to"注文履歴一覧を見る",admin_orders_path(order_check: @customer.id),class: "btn btn-primary mx-3"%><br>
   </div>
 
 <div class="mb-5"><br></div>
