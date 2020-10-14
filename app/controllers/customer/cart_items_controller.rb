@@ -11,7 +11,7 @@ class Customer::CartItemsController < ApplicationController
       cart_item = current_customer.cart_items.find_by(product_id: params[:cart_item][:product_id])
       cart_item.quantity += params[:cart_item][:quantity].to_i
       cart_item.save
-      flash[:notice] = "カート内商品の個数を追加しました。"
+      flash[:notice] = "カート内商品の数量を追加しました。"
       redirect_to cart_items_path
     elsif @cart_item.save
       flash[:notice] = "カートに新しい商品を追加しました。"
@@ -23,12 +23,13 @@ class Customer::CartItemsController < ApplicationController
 
   def update
     @cart_item = CartItem.find(params[:id])
+    @update_cart_items = 0
     if @cart_item.update(cart_item_params)
-      flash.now[:notice]="商品の個数を変更しました。"
+      flash.now[:notice]="カート内商品の数量を変更しました。"
+      @update_cart_items = @cart_item.id
     else
       flash.now[:error]="入力内容に誤りがあります。"
     end
-    @update_cart_items = @cart_item.id
     @cart_items = current_customer.cart_items
     render 'index'
   end

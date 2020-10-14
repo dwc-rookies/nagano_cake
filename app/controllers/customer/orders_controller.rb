@@ -92,7 +92,7 @@ class Customer::OrdersController < ApplicationController
   def complete
     if session[:order_completed] 
       session[:order_completed] = nil
-      flash.[:notice]="注文が完了しました。"
+      flash.now[:notice]="注文が完了しました。"
     else
       redirect_to root_path
     end
