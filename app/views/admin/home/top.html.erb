@@ -11,7 +11,7 @@
       <h3>本日の注文件数</h3>
     </div>
     <div class="col-sm-3 offset-sm-1">
-      <h3><%= link_to @orders.count, admin_orders_path %>件</h3>
+      <h3><%= link_to @orders.count, admin_orders_path(order_check: 0) %>件</h3>
     </div>
   </div>
 </div>

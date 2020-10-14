@@ -3,6 +3,8 @@
     <h4 class="mt-4 ml-5 mb-5">商品新規登録</h4>
   </div>
   <div class="row">
+
+    <% if false %>
     <% if @product.errors.any? %>
     <div class="text-danger">
       <h3><%= @product.errors.count %> errors prohibited this obj from being saved:</h3>
@@ -13,12 +15,14 @@
       </ul>
     </div>
     <% end %>
-  </div>
+    <% end %>
 
+  </div>
   <%= form_for(@product,url:admin_products_path) do |f| %>
   <div class="row">
     <div class="col-sm-4">
-      <%= f.attachment_field :image %>
+      <%= attachment_image_tag @product, :image, :fill, 300,300, format: "jpeg", fallback: 'no-image.png', onClick: "$('.img_field').click()", class: "center-block img-thumbnail img-responsive img_prev pull-left profile-img", fallback: "no_image.jpg", :width => "300", :height => "300" %>
+      <div class="mt-2"><%= f.attachment_field :image, class: 'img_field' %></div>
     </div>
     <div class="col-sm-6">
       <table>
@@ -40,7 +44,9 @@
         </tr>
         <tr>
           <td class="p-2 float-right">販売ステータス</td>
-          <td class="p-2"><%= f.select :is_active, [["販売中", true], ["販売停止中", false]], :include_blank => "--選択してください--", :selected => "--選択してください--" %></td>
+          <td class="p-2">
+            <%= f.select :is_active, [["販売中", true], ["販売停止中", false]], :include_blank => "--選択してください--", :selected => "--選択してください--" %>
+          </td>
         </tr>
       </table>
     </div>
