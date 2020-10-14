@@ -26,7 +26,7 @@
         <% end %>
       </td>
       <td>
-        <%= order.charge %>円
+        <%= order.charge.to_s(:delimited) %>円
       </td>
       <td>
         <% if order.status == 0 %>入金待ち
