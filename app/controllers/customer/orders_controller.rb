@@ -34,7 +34,7 @@ class Customer::OrdersController < ApplicationController
     when "ご自身の住所"
       @order.postcode = current_customer.postcode
       @order.address = current_customer.address
-      @order.name = current_customer.last_name + current_customer.first_name
+      @order.name = current_customer.first_name + current_customer.last_name
     when "登録済み住所から選択"
       @order.postcode = Delivery.find(set_delivery[:id]).postcode
       @order.address = Delivery.find(set_delivery[:id]).address
@@ -43,6 +43,7 @@ class Customer::OrdersController < ApplicationController
       if @order.postcode.blank? or @order.address.blank? or @order.name.blank?
         @order = Order.new
         @delivery = Delivery.new
+        flash.now[:error]="入力内容に誤りがあります。"
         render 'new'
       else
         session[:new_delivery] = true
@@ -54,14 +55,14 @@ class Customer::OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @cart_items = current_customer.cart_items
-    @order.save
 
+    if @order.save
       current_customer.cart_items.each do |ordered_product|
-        @ordered_product = OrderedProduct.new(
-          order_id: @order.id,
-          product_id: ordered_product.product.id,
-          purchase_money: ordered_product.product.tax_excluded_price,
-          quantity: ordered_product.quantity,
+      @ordered_product = OrderedProduct.new(
+        order_id: @order.id,
+        product_id: ordered_product.product.id,
+        purchase_money: ordered_product.product.tax_excluded_price,
+        quantity: ordered_product.quantity,
         )
         @ordered_product.save!
       end
@@ -76,6 +77,13 @@ class Customer::OrdersController < ApplicationController
       @delivery.save
       session[:new_delivery] = nil
     end
+
+  else
+    @order = Order.new
+    @delivery = Delivery.new
+    flash.now[:error]="入力内容に誤りがあります。"
+    render 'new'
+  end
     @cart_items.destroy_all
     session[:order_completed] = true
     redirect_to order_completed_path
@@ -84,6 +92,7 @@ class Customer::OrdersController < ApplicationController
   def complete
     if session[:order_completed] 
       session[:order_completed] = nil
+      flash.[:notice]="注文が完了しました。"
     else
       redirect_to root_path
     end

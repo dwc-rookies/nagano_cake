@@ -26,6 +26,10 @@
           <%= f.text_field :quantity %>
           <%= f.submit "数量を変える" %>
           <% end %>
+          <% if @update_cart_items == cart_item.id %>
+          <span class="badge badge-pill badge-success">更新しました</span>
+          <%= @update_cart_items = nil %>
+          <% end %>
         </td>
         <td><%= price * cart_item.quantity %></td>
         <td><button type="button" class="btn btn-success btn-sm">

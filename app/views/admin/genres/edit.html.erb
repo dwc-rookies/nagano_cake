@@ -2,6 +2,8 @@
   <div class="row">
     <h4 class="mt-4 ml-5 mb-5">ジャンル編集</h4>
   </div>
+
+  <% if false %>
   <% if @genre.errors.any? %>
   <div id="error_explanation" class="alert alert-danger">
     <ul>
@@ -11,6 +13,8 @@
     </ul>
   </div>
   <% end %>
+  <% end %>
+
   <%= form_for(@genre, url: admin_genre_path,method: :patch) do |f| %>
   <div class="row mb-5">
     <div class="mx-2">

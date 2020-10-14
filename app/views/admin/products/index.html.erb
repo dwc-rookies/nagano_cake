@@ -29,7 +29,7 @@
               <%= product.name %>
               <% end %>
             </td>
-            <td class="p-3"><%= product.tax_excluded_price %></td>
+            <td class="p-3"><%= product.tax_excluded_price.to_s(:delimited) %></td>
             <td class="p-3"><%= product.genre.name %></td>
             <td class="p-3">
               <% if product.is_active == true %>販売中

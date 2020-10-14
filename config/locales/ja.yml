@@ -1,0 +1,60 @@
+ja:
+  activerecord:
+    models:
+      admin: 管理者
+      cart_item: カート内商品
+      customer: 会員
+      delivery: 配送先
+      genre: ジャンル
+      ordered_product: 注文商品
+      order: 注文
+      product: 商品
+    attributes:
+      admin:
+        email: メールアドレス
+        encrypted_password: パスワード
+    attributes:
+      cart_item:
+        quantity: 個数
+    attributes:
+      customer:
+        email: メールアドレス
+        encrypted_password: パスワード
+        last_name: 名前
+        first_name: 名字
+        last_name_kana: 名前(カナ)
+        first_name_kana: 名字(カナ)
+        postcode: 郵便番号
+        address: 住所
+        phone_number: 電話番号
+        is_deleated: 会員ステータス
+    attributes:
+      delivery:
+        name: 宛名
+        postcode: 郵便番号
+        address: 住所
+    attributes:
+      genre:
+        name: ジャンル名称
+        is_active: 有効フラグ
+    attributes:
+      ordered_product:
+        quantity: 個数
+        purchase_money: 支払金額
+        production_status: 制作ステータス
+    attributes:
+      order:
+        postage: 送料
+        charge: 請求金額
+        pay: 支払方法
+        status: 注文ステータス
+        postcode: 郵便番号
+        address: 住所
+        name: 宛名
+    attributes:
+      products:
+        name: 商品名称
+        tax_excluded_price: 税抜価格
+        description: 商品説明
+        image_id: 商品画像
+        is_active: 販売ステータス
