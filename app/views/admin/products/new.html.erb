@@ -21,7 +21,7 @@
   <%= form_for(@product,url:admin_products_path) do |f| %>
   <div class="row">
     <div class="col-sm-4">
-      <%= attachment_image_tag @product, :image, :fill, 300,300, format: "jpeg", fallback: 'no-image.png', onClick: "$('.img_field').click()", class: "center-block img-thumbnail img-responsive img_prev pull-left profile-img", fallback: "no_image.jpg", :width => "300", :height => "300" %>
+      <%= attachment_image_tag @product, :image, :fill, 300, 225, format: "jpeg", fallback: 'no-image.png', onClick: "$('.img_field').click()", class: "center-block img-thumbnail img-responsive img_prev pull-left profile-img", fallback: "no_image.jpg", :width => "300", :height => "225" %>
       <div class="mt-2"><%= f.attachment_field :image, class: 'img_field' %></div>
     </div>
     <div class="col-sm-6">

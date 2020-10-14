@@ -39,7 +39,7 @@
           <% end %>
         </td>
         <td class="align-middle"><%= (price * cart_item.quantity).to_s(:delimited) %></td>
-        <td class="align-middle"><button type="button" class="btn btn-danger btn-sm">
+        <td class="text-center align-middle"><button type="button" class="btn btn-danger btn-sm">
             <%= link_to "削除する",cart_item_path(cart_item), method: :delete, class: "text-light" %>
           </button></td>
       </tr>
@@ -75,7 +75,9 @@
   </div>
   <% end %>
 
+  <% if @cart_items.present? %>
   <div class="text-center mb-5">
     <%= link_to '情報入力へ進む', new_order_path, class: "btn btn-success btn-lg" %>
   </div>
+  <% end %>
 </div>

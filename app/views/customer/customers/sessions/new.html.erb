@@ -27,7 +27,7 @@
 
 <div class="action-box">
   <div class="actions"><br>
-    <%= f.submit "ログイン", class: "btn btn-default" %>
+    <%= f.submit "ログイン", class: "btn btn-primary" %>
   </div>
 </div>
 <% end %>
@@ -42,7 +42,7 @@
   </div>
   
   <div class="offset-3">
-  <%= render "customer/customers/shared/links" %>
+            <span class="ml-5"><%= link_to "こちら", new_customer_registration_path %>から新規登録を行ってください。</span>
   <% end %>
   </div>
   
