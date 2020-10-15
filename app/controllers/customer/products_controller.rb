@@ -21,6 +21,7 @@ class Customer::ProductsController < ApplicationController
       @genre_name = '商品'
     end
     @products_count = @products.count
+    @products = @products.order(created_at: "DESC")
     @products = @products.page(params[:page]).per(8)
   end
 
