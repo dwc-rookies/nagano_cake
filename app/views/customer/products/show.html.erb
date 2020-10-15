@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-3">
-      <table>
+  <div class="row mt-5">
+    <div class="col-sm-2">
+      <table class="table table-borderless border border-dark">
         <tr>
-          <th>ジャンル検索</th>
+          <th class="border border-dark">ジャンル検索</th>
         </tr>
         <% @genres.each do |genre| %>
         <tr>
@@ -15,20 +15,34 @@
         <% end %>
       </table>
     </div>
-    <div class="col-xs-9">
-      <%= attachment_image_tag @product, :image, :fill, 300,300, format: "jpeg", class: "pull-left profile-img", fallback: "no_image.jpg", :width => "300", :height => "300" %>
-      <h2><%= @product.name %></h2>
-      <h4>商品説明</h4>
-      <%= @product.description %>
-      <h2>¥<%= (@product.tax_excluded_price*1.1).floor.to_s(:delimited) %>(税込)</h2>
-      <% if customer_signed_in? %>
-      <%= form_for(@cart_item) do |f| %>
-      <%= f.hidden_field :customer_id, :value => current_customer.id %>
-      <%= f.hidden_field :product_id, :value => @product.id %>
-      <%= f.select :quantity, [1,2,3,4,5] %>
-      <%= f.submit "カートに入れる" %>
-      <% end %>
-      <% end %>
+    <div class="col-sm-10">
+      <div class="row mt-3">
+        <div class="col-sm-5">
+          <%= attachment_image_tag @product, :image, :fill, 300,225, format: "jpeg", class: "pull-left profile-img float-right", fallback: "no_image.jpg", :width => "300", :height => "225" %>
+        </div>
+        <div class="col-sm-5">
+          <h2><%= @product.name %></h2>
+          <p><%= @product.description %></p>
+            <h2>
+            ¥<%= (@product.tax_excluded_price*1.1).floor.to_s(:delimited) %>
+            <span class="small">(税込)</span>
+            </h2>
+        </div>
+      </div>
+      <div class="row my-3">
+      <div class="col-sm-10">
+        <% if customer_signed_in? %>
+        <div class="float-right text-right">
+        <%= form_for(@cart_item) do |f| %>
+        <%= f.hidden_field :customer_id, :value => current_customer.id %>
+        <%= f.hidden_field :product_id, :value => @product.id %>
+        <%= f.select :quantity, [1,2,3,4,5], :include_blank => "個数選択", :selected => "個数選択" %>
+        <%= f.submit "カートに入れる", class: "btn btn-primary" %>
+        <% end %>
+</div>
+</div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

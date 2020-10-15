@@ -1,60 +1,64 @@
 <div class="container">
   <div class="row">
-    <h2>登録情報編集</h2>
+  <div class="col-sm-11 offset-sm-1">
+    <h2 class="mx-5 my-4">登録情報編集</h2>
+
     <%=form_for @customer do|f| %>
     <table class="table table-borderless">
 
       <tr>
-        <td><%= f.label:名前 %></td>
-        <td style="width:8%">(姓)</td>
-        <td><%=f.text_field :first_name%></td>
-        <td style="width:8%">(名)</td>
-        <td><%=f.text_field :last_name%></td>
+        <td class="p-2"><%= f.label:名前 %></td>
+        <td class="p-2" style="width:8%">(姓)</td>
+        <td class="p-2"><%=f.text_field :first_name%></td>
+        <td class="p-2" style="width:8%">(名)</td>
+        <td class="p-2"><%=f.text_field :last_name%></td>
       </tr>
 
       <tr>
-        <td><%= f.label :フリガナ %></td>
-        <td>(セイ)</td>
-        <td><%=f.text_field :first_name_kana%></td>
-        <td>(メイ)</td>
-        <td><%=f.text_field :last_name_kana%></td>
+        <td class="p-2"><%= f.label :フリガナ %></td>
+        <td class="p-2">(セイ)</td>
+        <td class="p-2"><%=f.text_field :first_name_kana%></td>
+        <td class="p-2">(メイ)</td>
+        <td class="p-2"><%=f.text_field :last_name_kana%></td>
       </tr>
 
       <tr>
-        <td><%= f.label :メールアドレス %></td>
-        <td></td>
-        <td><%= f.text_field :email%></td>
-        <td></td>
-        <td></td>
+        <td class="p-2"><%= f.label :メールアドレス %></td>
+        <td class="p-2"></td>
+        <td class="p-2"><%= f.text_field :email%></td>
+        <td class="p-2"></td>
+        <td class="p-2"></td>
       </tr>
 
       <tr>
-        <td><%= f.label :郵便番号（ハイフン無し） %></td>
-        <td></td>
-        <td><%= f.text_field :postcode %></td>
-        <td></td>
-        <td></td>
+        <td class="p-2"><%= f.label :郵便番号（ハイフン無し） %></td>
+        <td class="p-2"></td>
+        <td class="p-2"><%= f.text_field :postcode %></td>
+        <td class="p-2"></td>
+        <td class="p-2"></td>
       </tr>
 
       <tr>
-        <td><%= f.label :住所 %></td>
-        <td></td>
-        <td><%= f.text_field :address %></td>
-        <td></td>
-        <td></td>
+        <td class="p-2"><%= f.label :住所 %></td>
+        <td class="p-2"></td>
+        <td class="p-2"><%= f.text_field :address %></td>
+        <td class="p-2"></td>
+        <td class="p-2"></td>
       </tr>
 
       <tr>
-        <td><%= f.label :電話番号（ハイフン無し） %></td>
-        <td></td>
-        <td><%= f.text_field :phone_number%></td>
-        <td></td>
-        <td></td>
+        <td class="p-2"><%= f.label :電話番号（ハイフン無し） %></td>
+        <td class="p-2"></td>
+        <td class="p-2"><%= f.text_field :phone_number%></td>
+        <td class="p-2"></td>
+        <td class="p-2"></td>
       </tr>
 
     </table>
-    <%= f.submit "編集内容を保存する",class: "btn btn-info btn-sm"%>
-    <%= link_to "退会する", withdraw_customer_path, class: "btn btn-danger btn-sm" %>
+
+    <%= f.submit "編集内容を保存する",class: "btn btn-primary mx-5 mb-5"%>
+    <%= link_to "退会する", withdraw_customer_path, class: "btn btn-danger mb-5" %>
     <% end %>
   </div>
+</div>
 </div>
